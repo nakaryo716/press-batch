@@ -1,0 +1,11 @@
+[package]
+name = "press-batch"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.100"
+csv = "1.4.0"
+rayon = "1.11.0"
+serde = { version = "1.0.228", features = ["derive"] }
+thiserror = "2.0.17"
