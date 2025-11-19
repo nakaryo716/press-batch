@@ -1,6 +1,6 @@
 use std::fmt::Debug;
 
-use press_batch::{Press, Row, a};
+use press_batch::{Row, Voltage, a};
 use thiserror::Error;
 
 fn main() -> anyhow::Result<()> {
@@ -21,8 +21,8 @@ fn main() -> anyhow::Result<()> {
     // construct CSV reader from given csv file
     let mut reader = csv::Reader::from_path(path.first().unwrap())?;
 
-    let mut p1 = Press::new();
-    let mut p2 = Press::new();
+    let mut p1 = Voltage::new();
+    let mut p2 = Voltage::new();
 
     for res in reader.deserialize::<Row>() {
         let row = res?;
@@ -30,7 +30,7 @@ fn main() -> anyhow::Result<()> {
         p2.push(row.press_2);
     }
 
-    let res = a(p1, p2);
+    let res = a(p1.convert(), p2.convert());
     println!("{:?}", res);
 
     Ok(())
